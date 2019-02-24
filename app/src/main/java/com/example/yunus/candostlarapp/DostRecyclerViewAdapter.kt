@@ -39,4 +39,12 @@ class DostRecyclerViewAdapter(var tumDostlar : ArrayList<Dost>) : RecyclerView.A
             }
         }
     }
+
+    fun setFilter(arananlar : ArrayList<Dost>){
+        tumDostlar = ArrayList<Dost>()
+
+        tumDostlar.addAll(arananlar)
+        notifyDataSetChanged()
+
+    }
 }
