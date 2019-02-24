@@ -7,7 +7,7 @@ import android.view.Menu
 import android.widget.SearchView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
+class MainActivity : AppCompatActivity(){//,SearchView.OnQueryTextListener {
 
     var tumDostlar= ArrayList<Dost>()
     lateinit var myAdapter:DostRecyclerViewAdapter
@@ -23,8 +23,20 @@ class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
 
         var myLayoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         recyclerviewDostlar.layoutManager=myLayoutManager
-    }
 
+        searchViewDost.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                myAdapter.filter.filter(p0)
+                return false
+            }
+
+        })
+    }
+/*
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //menuyu inflate edip uygulamaya ekliyoruz
         menuInflater.inflate(R.menu.filtre_menu,menu)
@@ -54,6 +66,8 @@ class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
         myAdapter.setFilter(arananlar)
         return true
     }
+*/
+
 
     private fun veriKaynagiDoldur() {
         var dostAdlari= arrayOf("HAMSTER 1" , "KEDİ 1", "KEDİ 2","KEDİ 3","KEDİ 4","KÖPEK 1","KÖPEK 2","KÖPEK 3","KÖPEK 4")
