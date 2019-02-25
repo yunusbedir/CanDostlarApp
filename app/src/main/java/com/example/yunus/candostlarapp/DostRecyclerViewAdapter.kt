@@ -1,5 +1,6 @@
 package com.example.yunus.candostlarapp
 
+import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -47,7 +48,12 @@ class DostRecyclerViewAdapter(var tumDostlar : ArrayList<Dost>) : RecyclerView.A
             dostResim.setImageResource(oAnOlusanDost.resim)
 
             tekDostBilgisi.setOnClickListener{
-                Toast.makeText(tekDostBilgisi.context,"Tıkalan Öğe : " + position + " Adı : " + oAnOlusanDost.dostAdi , Toast.LENGTH_LONG).show()
+                //isimsiz class'ın context i kullanıyoruz
+                var intent = Intent(it.context,Main2Activity::class.java)
+                //veri yollamak için putExtra
+                intent.putExtra("imgResouce",oAnOlusanDost.resim)
+                intent.putExtra("tvText",oAnOlusanDost.dostAdi)
+                it.context.startActivity(intent)
             }
         }
     }
